@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
-
+import useAuth from '../hooks/useAuth';
 const Header = () => {
+
+        const { cerrarSesion } = useAuth()
+
     return (
         <header className="py-10 bg-indigo-900">
 
@@ -12,7 +15,10 @@ const Header = () => {
                 <Link to="/admin" className="text-white text-xl">Pacientes</Link>
                 <Link to="/admin"  className="text-white text-xl">Perfil</Link>
 
-                <button className="text-white text-xl" type="button">
+                <button 
+                className="text-white text-xl" 
+                type="button"
+                onClick={cerrarSesion} >
                     Cerrar sesion
                 </button>
             </nav>

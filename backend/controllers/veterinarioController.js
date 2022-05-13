@@ -83,8 +83,6 @@ const autenticar = async(req,res) =>{
         const error = new Error("El usuario no existe");
 
         return res.status(404).json({msg: error.message });
-       
-
     } 
 
     //si el usuairo esta confirmado
@@ -98,13 +96,13 @@ const autenticar = async(req,res) =>{
 
     if(await usuario.comprobarPassword(password)){
 
-        console.log(usuario)
         res.json({
-            // _id: usuario_id,
-            // nombre: usuario.nombre,
-            // email: usuario.email,
-            token:generarJWT(usuario.id)});
+            _id: usuario._id,
+            nombre: usuario.nombre,
+            email: usuario.email,
+            token: generarJWT(usuario.id),
 
+            });
     } else {
 
         const error = new Error("password incorrecto");

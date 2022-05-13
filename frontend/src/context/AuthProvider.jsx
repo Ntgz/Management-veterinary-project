@@ -25,6 +25,7 @@ const AuthProvider = ({children}) => {
                         Authorization: `Bearer ${token}`
                     }
                 }
+                //setea autentificacion del usuario
                 try {
                     const { data } = await clienteAxios('/veterinarios/perfil', config)
 
@@ -36,14 +37,20 @@ const AuthProvider = ({children}) => {
                 setCargando(false)
             }
     autenticarUsuario()
-    }, [])    
+    }, [])
+    
+    const cerrarSesion = () =>{
+        localStorage.removeItem('token')
+        setAuth({})
+    }
 
     return(
         <AuthContext.Provider
             value={{
                 auth,
                 setAuth,
-                cargando
+                cargando,
+                cerrarSesion
             }}
         >
 

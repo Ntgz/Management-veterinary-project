@@ -38,16 +38,14 @@ const registrar = async (req, res) => {
     }    
 };
 
+const perfil = (req, res) =>{
+    const {vet} = req;
+    res.json({vet});
+};
 // const perfil = (req,res) =>{
 
-//     const {vet} = req;
-
-
-//     res.json({perfil:vet});
+//     res.json({vet});
 // }
-const perfil = (req,res) =>{
-    res.json({ msg: "Mostrando Perfil"});
-}
 
 
 const confirmar = async(req, res) => {
@@ -67,7 +65,7 @@ const confirmar = async(req, res) => {
         await usuarioConfirmar.save();
 
         res.json({msg: "usuario confirmado correctamente"});
-        
+        // return
     } catch (error) {
         console.log(error)
     }
@@ -149,7 +147,7 @@ const comprobarToken = async (req, res) => {
     const tokenValido = await veterinario.findOne({ token });
 
     if (tokenValido) {
-        res.json({ msg: "Token valdo, usuario existe" });
+        res.json({ msg: "Token valido, usuario existe" });
     } else {
         const error = new Error("Token no valido");
 
@@ -157,27 +155,27 @@ const comprobarToken = async (req, res) => {
     }
     
 }
-const nuevoPassword = async(req, res) => {
-    const {token} = req.params;
+const nuevoPassword = async (req, res) => {
+    const { token } = req.params;
     
-    const {password} = req.body;
+    const { password } = req.body;
 
-    const vet = await veterinario.findOne({token});
-    if(!vet){
+    const vet = await veterinario.findOne({ token });
+    if (!vet) {
         const error = new Error("hubo error");
 
-        return res.status(400).json({msg: error.message });
+        return res.status(400).json({ msg: error.message });
     }
 
     try {
         vet.token = null;
         vet.password = password;
         await vet.save();
-        res.status(400).json({msg: "password modificado correcto" });
+        res.json({ msg: "password modificado correcto" });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};
 
 
 

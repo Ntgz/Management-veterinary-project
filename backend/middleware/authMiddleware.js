@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import veterinario from "../models/veterinario.js";
 import Paciente from "../models/Paciente.js";
-
+//proteje las rutas y siempre verifica por el token en el header
 const checkAuth = async (req, res, next) => {
     //restringir ciertas areas ejemplo:"un usuario pago o no pago"
     let token;
     if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")
-    ){
+    ) {
         // console.log("si tiene el token con bearer");
         try {
             token = req.headers.authorization.split(" ")[1];

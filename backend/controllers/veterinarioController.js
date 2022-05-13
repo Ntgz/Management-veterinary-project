@@ -40,7 +40,7 @@ const registrar = async (req, res) => {
 
 const perfil = (req, res) =>{
     const {vet} = req;
-    res.json({vet});
+    res.json(vet);
 };
 // const perfil = (req,res) =>{
 

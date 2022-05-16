@@ -13,6 +13,6 @@ router
     .route('/:id') 
     .get(checkAuth, obtenerPacientes)
     .put(checkAuth, actualizarPaciente)   
-    .delete(checkAuth, eliminarPaciente)
+    .delete(checkAuth, eliminarPaciente);
 
 export default router;

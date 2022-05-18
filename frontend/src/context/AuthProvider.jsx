@@ -10,6 +10,7 @@ const AuthContext = createContext()
 const AuthProvider = ({children}) => {
     const [cargando, setCargando] = useState(true)
     const [ auth, setAuth ] = useState({});
+    //efecto secundario
     useEffect(() => {
             const autenticarUsuario = async () => {
                 const token = localStorage.getItem('token')

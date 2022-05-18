@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Alerta from './Alerta'
 import usePacientes from '../hooks/usePacientes';
 const Formulario = () => {
@@ -8,8 +8,19 @@ const Formulario = () => {
     const [fecha, setFecha] = useState('')
     const [sintomas, setSintomas] = useState('')
     const [alerta, setAlerta] = useState({})
-    const { guardarPaciente } = usePacientes()
-
+    const { guardarPaciente, paciente } = usePacientes()
+    const [ id, setId ] = useState(null)
+    //efecto secundario puente entre react y navegador
+    useEffect(() => {
+        if(paciente?.nombre){
+            setNombre(paciente.nombre)
+            setPropietario(paciente.propietario)
+            setEmail(paciente.email)
+            setFecha(paciente.fecha)
+            setSintomas(paciente.sintomas)
+            setId(paciente._id)
+        }
+    }, [paciente])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -23,12 +34,18 @@ const Formulario = () => {
         }
 
         setAlerta({})
-        guardarPaciente({nombre, propietario, email, fecha, sintomas})
+        guardarPaciente({nombre, propietario, email, fecha, sintomas, id})
+        setAlerta({
+            msg:'Guardado correctamente'
+        })
+     
 
     }
     const {msg} = alerta
     return (
         <>
+
+            <h2 className="font-black text-3xl text-center">Administrador de pacientes </h2>
             <p className="text-lg text-center mb-10">
                 
                 Añade tus pacientes y {''}
@@ -119,7 +136,7 @@ const Formulario = () => {
                         type="submit"
                         className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-900
                         cursor-pointer transition-colors"
-                        value="Agregar paciente"
+                        value={ id ? 'guardar cambios' : 'Agregar paciente'}
                     
                     />
                 </div>

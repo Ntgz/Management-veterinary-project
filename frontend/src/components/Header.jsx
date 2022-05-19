@@ -13,7 +13,7 @@ const Header = () => {
 
             <nav className="flex gap-4 flex-col lg:flex-row mt-5 lg:mt-0 items-center">
                 <Link to="/admin" className="text-white text-xl">Pacientes</Link>
-                <Link to="/admin"  className="text-white text-xl">Perfil</Link>
+                <Link to="/admin/perfil"  className="text-white text-xl">Perfil</Link>
 
                 <button 
                 className="text-white text-xl" 

@@ -1,2 +1,2 @@
-# veterinario
-express y react
+# Management veterinary project
+express and react
